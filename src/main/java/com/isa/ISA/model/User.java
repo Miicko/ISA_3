@@ -1,12 +1,16 @@
 package com.isa.ISA.model;
 
+import java.util.Collection;
+import java.util.List;
 import jakarta.persistence.*;
-
-import java.util.Random;
+import com.isa.ISA.model.enums.UserRole;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -20,6 +24,8 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    private String login;
 
     @Column(name = "password")
     private String password;
@@ -39,11 +45,16 @@ public class User {
     @Column(name = "company_info")
     private String companyInfo;
 
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole role;
+
     public User() {
 
     }
 
-    public User(String city, String companyInfo, String country, String email, String firstName, String lastName, String occupation, String password, String phoneNumber) {
+    public User(String city, String companyInfo, String country, String email, String firstName, String lastName, String occupation, String password, String phoneNumber, UserRole role) {
         this.city = city;
         this.companyInfo = companyInfo;
         this.country = country;
@@ -53,6 +64,8 @@ public class User {
         this.occupation = occupation;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.login = email;
     }
 
     public long getId() {
@@ -125,5 +138,55 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    //Auth UserDetails
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == UserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
