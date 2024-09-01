@@ -22,7 +22,6 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) {
         UserDetails ud =  userRepository.findByLogin(email);
-        System.out.println("Printujeee");
         return ud;
     }
 

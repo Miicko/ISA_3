@@ -47,13 +47,9 @@ public class UserController {
 
     @PostMapping("/authentication/login")
     public ResponseEntity<JwtDto> signIn(@RequestBody SignInDto data) {
-        System.out.println("22222");
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-        System.out.println(usernamePassword);
         var authUser = authenticationManager.authenticate(usernamePassword);
-        System.out.println(authUser);
         var accessToken = tokenService.generateAccessToken((User) authUser.getPrincipal());
-        System.out.println(accessToken);
         return ResponseEntity.ok(new JwtDto(accessToken));
     }
     // create employee rest api

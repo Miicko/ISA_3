@@ -20,7 +20,6 @@ public class TokenProvider {
     public String generateAccessToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(JWT_SECRET);
-            System.out.println("Generise token");
             return JWT.create()
                     .withSubject(user.getUsername())
                     .withClaim("username", user.getUsername())
