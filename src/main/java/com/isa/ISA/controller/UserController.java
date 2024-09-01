@@ -68,7 +68,7 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
         return ResponseEntity.ok(user);
     }
-
+    //aa
     /*@GetMapping("/users/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         User user = userService.findByEmail(email);
