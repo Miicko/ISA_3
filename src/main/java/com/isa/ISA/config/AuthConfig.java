@@ -16,12 +16,14 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import com.isa.ISA.config.CustomCorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
 public class AuthConfig {
     @Autowired
     SecurityFilter securityFilter;
+    @Autowired CustomCorsConfiguration customCorsConfiguration;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -33,10 +35,12 @@ public class AuthConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/v1/authentication/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/userspace/*").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/authentication/*").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/userspace/*").permitAll()
                         //.requestMatchers(HttpMethod.POST, "/api/v1/books").hasRole("ADMIN")
                         //.anyRequest().authenticated())
                         .anyRequest().authenticated())
+                .cors(c -> c.configurationSource(customCorsConfiguration))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
