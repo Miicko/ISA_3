@@ -70,14 +70,14 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
     //aa
-    /*@GetMapping("/users/{email}")
+    @GetMapping("/userspace/users/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         User user = userService.findByEmail(email);
         if (user == null){
             throw new ResourceNotFoundException("User not exist with email :" + email);
         }
         return ResponseEntity.ok(user);
-    }*/
+    }
 
     // update employee rest api
 
