@@ -8,10 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   private usersUrl: string;
+  private usersEmailUrl: string;
   private signupUrl: string;
   private headers: HttpHeaders;
   constructor(private http: HttpClient) { 
     this.usersUrl = 'http://localhost:8080/api/v1/userspace/users';
+    this.usersEmailUrl = 'http://localhost:8080/api/v1/userspace/users/email';
     this.signupUrl = 'http://localhost:8080/api/v1/authentication/signup';
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -23,5 +25,8 @@ export class UserService {
   }
   public save(user: User) {
     return this.http.post<string>(this.signupUrl, JSON.stringify(user, null, 15), { headers: this.headers});
+  }
+  public findByEmail(mail: string): Observable<User> {
+    return this.http.get<User>(this.usersEmailUrl+'/'+mail,{ headers: this.headers});
   }
 }
