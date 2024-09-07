@@ -1,14 +1,15 @@
 package com.isa.ISA.repository;
 
-import com.isa.ISA.model.Equipment;
+import com.isa.ISA.model.Appointment;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    List<Equipment> findByCompanyId(Long companyId);
+    List<Appointment> findByCompanyId(Long companyId);
+    //List<Appointment> findByUserId(Long userId);
     @Transactional
     void deleteByCompanyId(Long companyId);
 }
