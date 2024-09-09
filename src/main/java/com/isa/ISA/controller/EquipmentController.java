@@ -67,7 +67,7 @@ public class EquipmentController {
 
         equipment.setEquipmentName(equipmentDetails.getEquipmentName());
         equipment.setQuantity(equipmentDetails.getQuantity());
-        equipment.setCompany(equipmentDetails.getCompany());
+        //equipment.setCompany(equipmentDetails.getCompany());
 
         Equipment updatedEquipment = equipmentService.save(equipment);
         return ResponseEntity.ok(updatedEquipment);

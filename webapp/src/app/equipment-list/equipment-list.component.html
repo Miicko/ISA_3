@@ -1,0 +1,50 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Reserve Equipment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipment of equipments">
+            <td>{{ equipment.id }}</td>
+            <td>{{ equipment.equipmentName }}</td>
+            <td>{{ equipment.quantity }}</td>
+            <td>
+                
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="{{equipment.quantity}}" value="0" class="slider" id="rang{{equipment.id}}">
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button (click)="displayMyRanges()">Add to cart</button>
+      <button (click)="clearCart()">Clear cart</button>
+      <div>
+        <h3>Shopping cart</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipment of equipmentsCart">
+                <td>{{ equipment.id }}</td>
+                <td>{{ equipment.equipmentName }}</td>
+                <td>{{ equipment.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <button (click)="reserveEquipment()">Reserve equipment and choose appointment</button>
+    </div>
+  </div>
+

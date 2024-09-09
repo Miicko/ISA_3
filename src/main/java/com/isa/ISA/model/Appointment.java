@@ -28,6 +28,8 @@ public class Appointment {
     private Date end;
     @Column(name = "isReserved")
     private boolean isReserved;
+    @Column(name = "userId", nullable = true)
+    private long userId;
 
     /*@ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name="user_id", nullable = true)
@@ -40,6 +42,7 @@ public class Appointment {
         this.end = end;
         this.start = start;
         this.isReserved = false;
+        this.userId = -1;
     }
 
     public Company getCompany() {
@@ -82,6 +85,13 @@ public class Appointment {
         this.start = start;
     }
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
     /*public User getUser() {
         return user;
     }
@@ -98,7 +108,7 @@ public class Appointment {
                 ", start=" + start +
                 ", end=" + end +
                 ", isReserved=" + isReserved +
-                //", user=" + user +
+                ", userid=" + userId +
                 '}';
     }
 }

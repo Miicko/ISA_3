@@ -7,11 +7,13 @@ import com.isa.ISA.model.Equipment;
 import com.isa.ISA.services.AppointmentService;
 import com.isa.ISA.services.CompanyService;
 import com.isa.ISA.services.EquipmentService;
+import com.isa.ISA.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +29,20 @@ public class AppointmentController {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired
+    private UserService userService;
+
+
     // get all appointments
     @GetMapping("/appointments")
     public List<Appointment> getAllAppointments(){
 
         return appointmentService.findAll();
+    }
+    @GetMapping("/appointments/reserved")
+    public List<Appointment> getAllNoReservedAppointments(){
+
+        return appointmentService.findByIsReserved();
     }
 
     // create appointment rest api
@@ -62,6 +73,28 @@ public class AppointmentController {
         return ResponseEntity.ok(appointments);
     }
 
+    @GetMapping("/companies/{id}/appointmentsnotreserved")
+    public ResponseEntity<List<Appointment>> getAllAppointmentsByCompanyIdNotReserved(@PathVariable Long id) {
+        if(!companyService.existById(id))
+            throw new ResourceNotFoundException("Company not exist with id :" + id);
+
+        List<Appointment> appointments = appointmentService.findByCompanyId(id);
+        List<Appointment> appointmentsNotReserved = new ArrayList<Appointment>();
+        for(Appointment a : appointments){
+            if(!a.isReserved())
+                appointmentsNotReserved.add(a);
+        }
+        return ResponseEntity.ok(appointmentsNotReserved);
+    }
+
+    @GetMapping("/users/{id}/appointments")
+    public ResponseEntity<List<Appointment>> getAllAppointmentsByUserId(@PathVariable Long id) {
+        if(!userService.existById(id))
+            throw new ResourceNotFoundException("User not exist with id :" + id);
+
+        List<Appointment> appointments = appointmentService.findByUserId(id);
+        return ResponseEntity.ok(appointments);
+    }
     // update appointment rest api
 
     @PutMapping("/appointments/{id}")

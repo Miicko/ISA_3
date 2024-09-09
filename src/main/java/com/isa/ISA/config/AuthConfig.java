@@ -49,6 +49,8 @@ public class AuthConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/companies/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/equipments/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/equipments/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/reservedequipments/*").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/reservedequipments/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/appointments/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/appointments/**").permitAll()
                         //.requestMatchers(HttpMethod.POST, "/api/v1/books").hasRole("ADMIN")

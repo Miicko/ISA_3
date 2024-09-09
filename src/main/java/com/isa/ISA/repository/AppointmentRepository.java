@@ -9,7 +9,8 @@ import java.util.List;
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
     List<Appointment> findByCompanyId(Long companyId);
-    //List<Appointment> findByUserId(Long userId);
+    List<Appointment> findByUserId(Long userId);
+    List<Appointment> findByIsReserved(boolean isReserved);
     @Transactional
     void deleteByCompanyId(Long companyId);
 }
