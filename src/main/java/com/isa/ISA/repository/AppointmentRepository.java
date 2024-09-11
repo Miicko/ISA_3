@@ -11,6 +11,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<Appointment> findByCompanyId(Long companyId);
     List<Appointment> findByUserId(Long userId);
     List<Appointment> findByIsReserved(boolean isReserved);
+    List<Appointment> findByIsDone(boolean isDone);
     @Transactional
     void deleteByCompanyId(Long companyId);
 }

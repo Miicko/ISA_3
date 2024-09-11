@@ -4,17 +4,17 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-            <th scope="col">Reserve Equipment</th>
+            <th scope="col">Appointment start</th>
+            <th scope="col">Appointment end</th>
+            <th scope="col">Reserve Appointment</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let appointment of appointments">
             <td>{{ appointment.id }}</td>
-            <td>{{ appointment.start }}</td>
-            <td>{{ appointment.end }}</td>
-            <td><button (click)="reserveAppointment()">Reserve Appointment</button></td>
+            <td>{{ appointment.start | date:'dd-MMM-yy h:mm:ss a'}}</td>
+            <td>{{ appointment.end | date:'dd-MMM-yy h:mm:ss a'}}</td>
+            <td><button (click)="reserveAppointment(appointment.id)">Reserve Appointment</button></td>
           </tr>
         </tbody>
       </table>

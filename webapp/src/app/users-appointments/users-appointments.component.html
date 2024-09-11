@@ -1,0 +1,47 @@
+<h3 style="text-align: center;">Reserved appointments</h3>
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Cancel Appointment</th>
+            <th scope="col">Finalize Appointment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let app of appointments">
+            <td>{{ app.id }}</td>
+            <td>{{ app.start }}</td>
+            <td>{{ app.end }}</td>
+            <td><button (click)="cancelAppointment(app.id)">Cancel Appointment</button></td>
+            <td><button (click)="finalizeAppointment(app.id)">Finalize Appointment</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h3 style="text-align: center;">Appointment history</h3>
+  <div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let app of appointmentsHistory">
+            <td>{{ app.id }}</td>
+            <td>{{ app.start }}</td>
+            <td>{{ app.end }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

@@ -31,5 +31,6 @@ public class AppointmentService {
     public List<Appointment> findByCompanyId(Long companyId) { return appointmentRepository.findByCompanyId(companyId);}
     public List<Appointment> findByUserId(Long userId) { return appointmentRepository.findByUserId(userId);}
     public List<Appointment> findByIsReserved() { return appointmentRepository.findByIsReserved(false);}
+    public List<Appointment> findByIsDone(boolean done) { return appointmentRepository.findByIsDone(done);}
     public boolean existById(Long id) { return appointmentRepository.existsById(id); }
 }

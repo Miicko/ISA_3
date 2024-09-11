@@ -18,6 +18,10 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { EquipmentListComponent } from './equipment-list/equipment-list.component';
 import { MatSlider, MatSliderModule } from '@angular/material/slider';
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
+import { UsersAppointmentsComponent } from './users-appointments/users-appointments.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ComplaintListComponent } from './complaint-list/complaint-list.component';
+import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 
 
 @NgModule({
@@ -31,6 +35,10 @@ import { AppointmentListComponent } from './appointment-list/appointment-list.co
     CompanyListComponent,
     EquipmentListComponent,
     AppointmentListComponent,
+    UsersAppointmentsComponent,
+    ProfileComponent,
+    ComplaintListComponent,
+    ComplaintFormComponent,
   ],
   imports: [
     BrowserModule,

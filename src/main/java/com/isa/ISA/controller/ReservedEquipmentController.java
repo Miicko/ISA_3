@@ -39,7 +39,8 @@ public class ReservedEquipmentController {
     // create equipment rest api
     @PostMapping("/appointments/{appointmentId}/reservedequipments")
     public ResponseEntity<ReservedEquipment> createReservedEquipment(@PathVariable(value="appointmentId") Long appointmentId, @RequestBody ReservedEquipment reservedEquipment) {
-        ReservedEquipment req = new ReservedEquipment(reservedEquipment.getId(), reservedEquipment.getEquipmentName(), reservedEquipment.getQuantity());
+        System.out.println("Kreira req");
+        ReservedEquipment req = new ReservedEquipment(reservedEquipment.getEquipmentName(), reservedEquipment.getQuantity());
         Appointment a =  appointmentService.findById(appointmentId).orElseThrow(() -> new ResourceNotFoundException("Not found appointment with appointment id " + appointmentId));
         req.setAppointment(a);
         reservedEquipmentService.save(req);
@@ -74,7 +75,7 @@ public class ReservedEquipmentController {
         reservedEquipment.setAppointment(reservedEquipmentDetails.getAppointment());
 
         ReservedEquipment updatedReservedEquipment = reservedEquipmentService.save(reservedEquipment);
-        return ResponseEntity.ok(reservedEquipment);
+        return ResponseEntity.ok(updatedReservedEquipment);
     }
 
     // delete equipment rest api

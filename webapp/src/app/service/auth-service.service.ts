@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, delay } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { UserDetails } from '../model/user-details';
 import { User } from '../model/user';
@@ -16,6 +16,7 @@ export class AuthService {
 
   private headers: HttpHeaders;
   private user: User;
+  private userId: number;
   constructor(private http: HttpClient, private userService: UserService) {
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -63,7 +64,7 @@ export class AuthService {
     }
   }
 
-  getLoggedUser(): User{
+  getLoggedUser(): Observable<User>{
     let em = this.decodeEmail();
     if(em != ''){
       let retval = this.userService.findByEmail(em).subscribe(data => {
@@ -78,9 +79,27 @@ export class AuthService {
         this.user.phoneNumber = retuser.phoneNumber;
         this.user.id = retuser.id;
       });
-      return this.user;
+      return of(this.user).pipe(delay(500));
     }else
       throw console.error("Errror finding user by email!");
       ;
+  }
+  getLoggedUserId(): Observable<any>{
+    let em = this.decodeEmail();
+    let retId;
+    if(em != ''){
+      let retval = this.userService.findByEmail(em).subscribe(data => {
+        let retuser = data;
+        retId = of(retuser.id);
+      });
+      return of(retId).pipe(delay(1000));
+    }else
+      throw console.error("Errror finding user by email!");
+      ;
+  }
+
+  otherFunc(a : number) : number{
+    console.log(a)
+    return a;
   }
 }

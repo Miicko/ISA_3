@@ -1,0 +1,18 @@
+<h3>Write Complaint</h3>
+<form [formGroup]="createComplaintForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+        <div class="form-group">
+        <label>Complaint Text</label>
+        <input type="text"
+                formControlName="ct"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.ct.errors }" />
+        <div *ngIf="submitted && f.ct.errors" class="invalid-feedback">
+        </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary mr-1">Submit</button>
+      </div>
+</form>

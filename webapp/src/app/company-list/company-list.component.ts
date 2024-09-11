@@ -24,8 +24,15 @@ export class CompanyListComponent implements OnInit{
     console.log("button clicked" + companyId);
     this.gotoCompanyEquipments(companyId);
   }
+  public leaveComplaint(companyId : any){
+    console.log("button clicked" + companyId);
+    this.gotoComplaint(companyId);
+  }
 
   gotoCompanyEquipments(companyId : any) {
     this.router.navigate(['/equipments'], {queryParams: {companyId}});
+  }
+  gotoComplaint(companyId : any) {
+    this.router.navigate(['/leaveComplaint'], {queryParams: {companyId}});
   }
 }

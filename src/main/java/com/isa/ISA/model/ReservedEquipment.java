@@ -9,7 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "reserved_equipments")
 public class ReservedEquipment {
     @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     //@ManyToOne(cascade = CascadeType.ALL)
@@ -35,17 +35,14 @@ public class ReservedEquipment {
         this.id = id;
         this.quantity = quantity;
     }
-    public ReservedEquipment(long id, String equipmentName,  int quantity) {
-
-        this.appointment = appointment;
-        this.equipmentName = equipmentName;
-        this.id = id;
-        this.quantity = quantity;
-    }
-    public ReservedEquipment(String equipmentName, int quantity) {
+    public ReservedEquipment(String equipmentName,  int quantity) {
         this.equipmentName = equipmentName;
         this.quantity = quantity;
     }
+    /*public ReservedEquipment(String equipmentName, int quantity) {
+        this.equipmentName = equipmentName;
+        this.quantity = quantity;
+    }*/
 
     public Appointment getAppointment() {
         return appointment;

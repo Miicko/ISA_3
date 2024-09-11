@@ -60,14 +60,15 @@ public class EquipmentController {
 
     // update equipment rest api
 
-    @PutMapping("/equipments/{id}")
-    public ResponseEntity<Equipment> updateEquipment(@PathVariable Long id, @RequestBody Equipment equipmentDetails){
+    @PutMapping("/companies/{companyId}/equipments/{id}")
+    public ResponseEntity<Equipment> updateEquipment(@PathVariable Long companyId, @PathVariable Long id, @RequestBody Equipment equipmentDetails){
+        System.out.println("Updateuje eqq");
         Equipment equipment = equipmentService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Equipment not exist with id :" + id));
-
+        Company c =  companyService.findById(companyId).orElseThrow(() -> new ResourceNotFoundException("Not found company with company id " + companyId));
         equipment.setEquipmentName(equipmentDetails.getEquipmentName());
         equipment.setQuantity(equipmentDetails.getQuantity());
-        //equipment.setCompany(equipmentDetails.getCompany());
+        equipment.setCompany(c);
 
         Equipment updatedEquipment = equipmentService.save(equipment);
         return ResponseEntity.ok(updatedEquipment);

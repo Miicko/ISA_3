@@ -53,12 +53,12 @@ export class UserLoginComponent {
     console.log(
       'SUCCESS!! :-)\n\n' + JSON.stringify(this.createUserForm.controls['email'].value + "   " +  this.createUserForm.controls['password'].value, null, 6)
     );
-    this.authService.login(this.userDetails).subscribe(result => this.gotoUserList)
+    this.authService.login(this.userDetails).subscribe(result => this.gotoUserList())
     //this.userService.save(this.user).subscribe(result => this.gotoUserList());
   }
 
   gotoUserList() {
-    //this.router.navigate(['/users']);
+    this.router.navigate(['/']);
     console.log("Uspeo login");
   }
 }

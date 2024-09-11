@@ -28,8 +28,13 @@ public class Appointment {
     private Date end;
     @Column(name = "isReserved")
     private boolean isReserved;
-    @Column(name = "userId", nullable = true)
+    @Column(name = "isDone")
+    private boolean isDone;
+    @Column(name = "userId")
     private long userId;
+
+    @Column(name = "cid", nullable = true)
+    private long cId;
 
     /*@ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name="user_id", nullable = true)
@@ -43,6 +48,23 @@ public class Appointment {
         this.start = start;
         this.isReserved = false;
         this.userId = -1;
+        this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public long getCId() {
+        return cId;
+    }
+
+    public void setCId(long cId) {
+        this.cId = cId;
     }
 
     public Company getCompany() {

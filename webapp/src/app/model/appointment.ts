@@ -1,7 +1,11 @@
+import { Company } from "./company";
+
 export class Appointment {
     id : any;
     start : Date;
     end : Date;
-    isReserved : boolean;
+    reserved : boolean;
     userId : number;
+    cid: number;
+    done : boolean;
 }
